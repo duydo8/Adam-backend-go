@@ -1,5 +1,7 @@
 package initializers
 
+import "Adam-backend-go/model"
+
 func SyncDatabase() {
-	DB.AutoMigrate()
+	DB.AutoMigrate(model.Accounts{})
 }

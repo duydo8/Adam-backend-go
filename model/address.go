@@ -9,8 +9,7 @@ type Address struct {
 	DistrictId    int
 	WardId        int
 	AccountId     int
-	IsDeleted     bool
-	IsActive      bool
+	Status        bool
 	CreateDate    time.Time
 	IsDefault     bool
 	PhoneNumber   string

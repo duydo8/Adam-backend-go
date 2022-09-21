@@ -13,8 +13,7 @@ type Accounts struct {
 	Role             bool
 	VerificationCode string `gorm:"column:verification_code"`
 	TimeValid        time.Time
-	IsActive         bool
-	IsDeleted        bool
+	Status           bool
 	CreateDate       time.Time
 	Priority         float64
 }

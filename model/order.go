@@ -17,7 +17,7 @@ type Order struct {
 	AddressDetail    string
 	OrderCode        string
 	ReturnOrderPrice float64
-	HistoryOrder     []HistoryOrder `json:"-",gorm:"foreignKey:o;reference:ID"`
-	CartItems        []CartItems    `json:"-",gorm:"foreignKey:OrderID;reference:ID"`
-	DetailOrder      []DetailOrder  `json:"-",gorm:"foreignKey:OrderID;reference:ID"`
+	HistoryOrders    []HistoryOrder `json:"-" gorm:"foreignKey:order_id"`
+	CartItems        []CartItems    `json:"-" gorm:"foreignKey:order_id"`
+	DetailOrders     []DetailOrder  `json:"-" gorm:"foreignKey:order_id"`
 }

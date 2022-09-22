@@ -13,5 +13,5 @@ type DiscountOrder struct {
 	SalePrice     float64
 	OrderMinPrice float64
 	OrderMaxPrice float64
-	EventID       int
+	EventID       int `gorm:"column:event_id"`
 }

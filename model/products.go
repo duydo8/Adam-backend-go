@@ -10,11 +10,11 @@ type Product struct {
 	VoteAverage float64
 	CreateDate  time.Time `gorm:"column:create_date"`
 
-	CategoryId      int
-	Status          bool
-	TagProducts     []TagProduct      `json:"-" gorm:"foreignKey:product_id"`
-	Comment         []Comments        `json:"-" gorm:"foreignKey:product_id"`
-	Favorite        []Favorite        `json:"-" gorm:"foreignKey:product_id"`
-	DetailProduct   []DetailProduct   `json:"-" gorm:"foreignKey:product_id"`
-	MaterialProduct []MaterialProduct `json:"-" gorm:"foreignKey:product_id"`
+	CategoryId       int
+	Status           bool
+	TagProducts      []TagProduct      `json:"-" gorm:"foreignKey:product_id"`
+	Comments         []Comments        `json:"-" gorm:"foreignKey:product_id"`
+	Favorites        []Favorite        `json:"-" gorm:"foreignKey:product_id"`
+	DetailProducts   []DetailProduct   `json:"-" gorm:"foreignKey:product_id"`
+	MaterialProducts []MaterialProduct `json:"-" gorm:"foreignKey:product_id"`
 }

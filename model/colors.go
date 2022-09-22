@@ -8,6 +8,6 @@ type Color struct {
 
 	CreateDate time.Time `gorm:"column:create_date"`
 
-	Status        bool
-	DetailProduct []DetailProduct `json:"-",gorm:"foreignKey:color_id;"`
+	Status         bool
+	DetailProducts []DetailProduct `json:"-",gorm:"foreignKey:color_id;"`
 }

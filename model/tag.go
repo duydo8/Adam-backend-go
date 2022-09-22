@@ -8,5 +8,5 @@ type Tag struct {
 	CreateDate      time.Time `gorm:"column:create_date"`
 	DetailProductId int
 	Status          bool
-	TagProducts     []TagProduct `json:"-",gorm:"foreignKey:tag_id"`
+	TagProducts     []TagProduct `json:"-" gorm:"foreignKey:tag_id"`
 }

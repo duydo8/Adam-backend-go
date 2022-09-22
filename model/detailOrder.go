@@ -11,6 +11,6 @@ type DetailOrder struct {
 	Status          bool
 	CreateDate      time.Time `gorm:"column:create_date"`
 	Reason          string
-	DetailProductID int
-	OrderID         int
+	DetailProductID int `gorm:"column:detail_product_id"`
+	OrderID         int `gorm:"column:order_id"`
 }

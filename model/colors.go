@@ -4,9 +4,10 @@ import "time"
 
 type Color struct {
 	ID        int
-	ColorName string
+	ColorName string `gorm:"column:color_name"`
 
-	CreateDate      time.Time
-	DetailProductId int
-	Status          bool
+	CreateDate time.Time `gorm:"column:create_date"`
+
+	Status        bool
+	DetailProduct []DetailProduct `json:"-",gorm:"foreignKey:color_id;"`
 }

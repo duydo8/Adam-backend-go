@@ -6,10 +6,10 @@ type Comments struct {
 	ID              int
 	Content         string
 	Vote            int
-	CreateDate      time.Time
+	CreateDate      time.Time `gorm:"column:create_date"`
 	CommentStatus   int
-	CommentParentId int
-	AccountId       int
-	ProductId       int
+	CommentParentID int
+	AccountID       int `gorm:"column:account_id"`
+	ProductID       int `gorm:"column:product_id"`
 	Status          bool
 }

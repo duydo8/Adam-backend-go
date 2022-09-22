@@ -5,7 +5,7 @@ import "time"
 type Order struct {
 	ID          int
 	Status      int
-	CreateDate  time.Time
+	CreateDate  time.Time `gorm:"column:create_date"`
 	AccountId   int
 	FullName    string
 	PhoneNumber string
@@ -17,4 +17,7 @@ type Order struct {
 	AddressDetail    string
 	OrderCode        string
 	ReturnOrderPrice float64
+	HistoryOrder     []HistoryOrder `json:"-",gorm:"foreignKey:o;reference:ID"`
+	CartItems        []CartItems    `json:"-",gorm:"foreignKey:OrderID;reference:ID"`
+	DetailOrder      []DetailOrder  `json:"-",gorm:"foreignKey:OrderID;reference:ID"`
 }

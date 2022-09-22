@@ -6,9 +6,9 @@ type CartItems struct {
 	ID              int
 	Quantity        int
 	TotalPrice      float64
-	AccountId       int
-	DetailProductId int
+	AccountID       int `gorm:"column:account_id"`
+	DetailProductID int `gorm:"column:detail_product_id"`
 	Status          bool
 	CreateDate      time.Time
-	OrderId         int
+	OrderID         int `gorm:"column:order_id"`
 }

@@ -6,9 +6,8 @@ type HistoryOrder struct {
 	ID int
 
 	Description string
-	UpdateTime  time.Time
+	UpdateTime  time.Time `gorm:"column:update_time"`
 	TotalPrice  float64
 	Status      int
 	OrderId     int
 }
-

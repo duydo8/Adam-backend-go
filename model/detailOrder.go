@@ -9,8 +9,8 @@ type DetailOrder struct {
 	IsDeleted       bool
 	DetailOrderCode string
 	Status          bool
-	CreateDate      time.Time
+	CreateDate      time.Time `gorm:"column:create_date"`
 	Reason          string
-	DetailProductId int
-	OrderId         int
+	DetailProductID int
+	OrderID         int
 }

@@ -4,7 +4,7 @@ type District struct {
 	ID         int
 	Name       string
 	Prefix     string
-	ProvinceId int
-	WardId     int
-	AddressId  int
+	ProvinceID int
+	Addresses  []Address `json:"-" gorm:"foreignKey:AddressID"`
+	Ward       []Ward    `json:"-" gorm:"foreignKey:WardID"`
 }

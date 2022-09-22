@@ -4,9 +4,10 @@ import "time"
 
 type Category struct {
 	ID           int
-	CategoryName string
+	CategoryName string `gorm:"column:category_name"`
 
-	CreateDate       time.Time
-	CategoryParentId int
+	CreateDate       time.Time `gorm:"column:create_date"`
+	CategoryParentID int       `gorm:"column:category_parent_id"`
 	Status           bool
+	Products         []Product `json:"-",gorm:"foreignKey:category_id"`
 }

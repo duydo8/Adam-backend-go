@@ -5,7 +5,8 @@ import "time"
 type Size struct {
 	ID              int
 	SizeName        string
-	CreateDate      time.Time
+	CreateDate      time.Time `gorm:"column:create_date"`
 	DetailProductId int
 	Status          bool
+	DetailProducts  []DetailProduct `json:"-" gorm:"foreignKey:size_id"`
 }

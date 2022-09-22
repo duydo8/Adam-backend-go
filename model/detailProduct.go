@@ -2,15 +2,16 @@ package model
 
 import "time"
 
-type detailProduct struct {
+type DetailProduct struct {
 	ID           int
 	Quantity     int
 	PriceImport  float64
 	PriceExport  float64
 	ProductImage string
 	Status       bool
-	ProductId    int
-	ColorId      int
-	SizeId       int
-	CreateDate   time.Time
+	ProductID    int
+	ColorID      int
+	SizeID       int
+	CreateDate   time.Time   `gorm:"column:create_date"`
+	CartItems    []CartItems `json:"-" gorm:"foreignKey:detail_product_id"`
 }

@@ -6,5 +6,5 @@ type MaterialProduct struct {
 	MaterialId int
 	ProductId  int
 	Status     bool
-	CreateDate time.Time
+	CreateDate time.Time `gorm:"column:create_date"`
 }

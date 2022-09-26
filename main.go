@@ -2,6 +2,7 @@ package main
 
 import (
 	"Adam-backend-go/controller"
+	"Adam-backend-go/controller/Admin"
 	"Adam-backend-go/initializers"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -17,5 +18,11 @@ func main() {
 	r.Use(cors.Default())
 	r.POST("sign-up", controller.SignUp)
 	r.GET("log-in", controller.Login)
+	admin := r.Group("admin")
+	{
+		admin.POST("create-account", Admin.CreateAccountAdmin)
+		admin.GET("verify", Admin.Verify)
+	}
+
 	r.Run()
 }

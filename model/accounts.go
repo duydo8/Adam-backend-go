@@ -4,9 +4,9 @@ import "time"
 
 type Accounts struct {
 	ID               int    `gorm:"primaryKey,AUTO_INCREMENT"`
-	PhoneNumber      string `gorm:"column:phone_number,NOT NULL"`
-	FullName         string `gorm:"column:full_name,NOT NULL"`
-	Username         string `gorm:"column:user_name"`
+	PhoneNumber      string ` gorm:"column:phone_number"`
+	FullName         string `json:"FullName" gorm:"column:full_name"`
+	Username         string `gorm:"column:username"`
 	Password         string
 	Email            string
 	Photo            string

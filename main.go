@@ -22,6 +22,9 @@ func main() {
 	{
 		admin.POST("create-account", Admin.CreateAccountAdmin)
 		admin.GET("verify", Admin.Verify)
+		admin.GET("find-by-pageable", Admin.AccountAdminFindByPageable)
+		admin.GET("change-password", Admin.AdminAccountChangePass)
+		admin.DELETE("delete-by-id", Admin.AdminAccountDeleteById)
 	}
 
 	r.Run()

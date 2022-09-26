@@ -9,7 +9,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"io"
+	"math"
 	"net/smtp"
+	"strconv"
 	"time"
 )
 
@@ -27,6 +29,36 @@ type Pagination struct {
 	Account      []model.Accounts
 }
 
+func AccountAdminFindByPageable(context *gin.Context) {
+	perPage := context.DefaultQuery("size", "10")
+	size, _ := strconv.Atoi(perPage)
+	pageStr := context.DefaultQuery("page", "1")
+	page, _ := strconv.Atoi(pageStr)
+	offset := (page - 1) * size
+	var accounts []model.Accounts
+	initializers.DB.Where("status=?", 1).Limit(size).Offset(offset).Find(&accounts)
+	var totalAccount int64
+	initializers.DB.Raw("select count(*) from accounts where status=1 ").Scan(&totalAccount)
+	fmt.Println(totalAccount)
+	totalPage := math.Ceil(float64(totalAccount/int64(size) + 1))
+	previousPage := page - 1
+	if previousPage < 0 {
+		previousPage = 0
+	}
+	nextPage := page + 1
+	if totalPage == 1 && page == 1 {
+		nextPage = 1
+	}
+	config.CustomResponse(context, 200, "none",
+		Pagination{
+			NextPage:     nextPage,
+			PreviousPage: previousPage,
+			CurrentPage:  page,
+			TotalElement: int(totalAccount),
+			TotalPage:    int(math.Ceil(totalPage)),
+			Account:      accounts,
+		})
+}
 func EncodeToString(max int) string {
 	b := make([]byte, max)
 	n, err := io.ReadAtLeast(rand.Reader, b, max)
@@ -79,6 +111,7 @@ func CreateAccountAdmin(ctx *gin.Context) {
 	config.CustomResponse(ctx, 200, "success", account)
 
 }
+
 func Verify(ctx *gin.Context) {
 	code := ctx.Query("code")
 	phoneNumber := ctx.Query("phone_number")
@@ -91,6 +124,42 @@ func Verify(ctx *gin.Context) {
 		account.VerificationCode = ""
 		account.TimeValid = time.Time{}
 		config.CustomResponse(ctx, 200, "success", nil)
+	}
+
+}
+func AdminAccountChangePass(ctx *gin.Context) {
+	var account model.Accounts
+	username := ctx.Query("username")
+	curPass := ctx.Query("oldPassword")
+	password := ctx.Query("password")
+	repPassword := ctx.Query("repPassword")
+	if err := initializers.DB.Where("username=?", username).Find(&account); err != nil || account.ID == 0 {
+		config.CustomResponse(ctx, 200, "not found", nil)
+		return
+	}
+	if account.Password != curPass {
+		config.CustomResponse(ctx, 200, "password is incorrect", nil)
+		return
+	}
+	if repPassword != password {
+		config.CustomResponse(ctx, 400, "password and rep password not equal", nil)
+		return
+	}
+	account.Password = password
+	initializers.DB.Save(&account)
+	config.CustomResponse(ctx, 200, "success", account)
+	return
+
+}
+func AdminAccountDeleteById(ctx *gin.Context) {
+	var account model.Accounts
+	id := ctx.Query("id")
+	if err := initializers.DB.Delete(&account, id); err != nil {
+		config.CustomResponse(ctx, 400, "can't delete", err)
+		return
+	} else {
+		config.CustomResponse(ctx, 200, "success", err)
+		return
 	}
 
 }

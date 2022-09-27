@@ -10,3 +10,7 @@ type Tag struct {
 	Status          bool
 	TagProducts     []TagProduct `json:"-" gorm:"foreignKey:tag_id"`
 }
+type TagCreate struct {
+	ID      int
+	TagName string
+}

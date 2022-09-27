@@ -10,3 +10,7 @@ type Size struct {
 	Status          bool
 	DetailProducts  []DetailProduct `json:"-" gorm:"foreignKey:size_id"`
 }
+type SizeCreate struct {
+	ID       int
+	SizeName string
+}

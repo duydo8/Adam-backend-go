@@ -18,3 +18,10 @@ type Product struct {
 	DetailProducts   []DetailProduct   `json:"-" gorm:"foreignKey:product_id"`
 	MaterialProducts []MaterialProduct `json:"-" gorm:"foreignKey:product_id"`
 }
+type ProductAdminCreate struct {
+	ID          int
+	ProductName string
+	Description string
+	Image       string
+	CategoryId  int
+}

@@ -11,3 +11,7 @@ type Category struct {
 	Status           bool
 	Products         []Product `json:"-",gorm:"foreignKey:category_id"`
 }
+type CategoryAdminCreate struct {
+	CategoryName     string
+	CategoryParentID int
+}

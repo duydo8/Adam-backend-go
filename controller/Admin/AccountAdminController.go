@@ -127,17 +127,28 @@ func Verify(ctx *gin.Context) {
 	}
 
 }
+
+type accountAdminChangePass struct {
+	username    string
+	oldPassword string
+	password    string
+	repPassword string
+}
+
 func AdminAccountChangePass(ctx *gin.Context) {
 	var account model.Accounts
+	//var accountChangePass accountAdminChangePass
+	//ctx.ShouldBindJSON(&accountChangePass)
 	username := ctx.Query("username")
 	curPass := ctx.Query("oldPassword")
 	password := ctx.Query("password")
 	repPassword := ctx.Query("repPassword")
-	if err := initializers.DB.Where("username=?", username).Find(&account); err != nil || account.ID == 0 {
+	if initializers.DB.Where("username=?", username).Find(&account); account.ID == 0 {
+		fmt.Println(username, account.ID)
 		config.CustomResponse(ctx, 200, "not found", nil)
 		return
 	}
-	if account.Password != curPass {
+	if err := bcrypt.CompareHashAndPassword([]byte(account.Password), []byte(curPass)); err != nil {
 		config.CustomResponse(ctx, 200, "password is incorrect", nil)
 		return
 	}
@@ -145,7 +156,8 @@ func AdminAccountChangePass(ctx *gin.Context) {
 		config.CustomResponse(ctx, 400, "password and rep password not equal", nil)
 		return
 	}
-	account.Password = password
+	hash, _ := bcrypt.GenerateFromPassword([]byte(password), 10)
+	account.Password = string(hash)
 	initializers.DB.Save(&account)
 	config.CustomResponse(ctx, 200, "success", account)
 	return

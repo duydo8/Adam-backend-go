@@ -11,3 +11,7 @@ type Color struct {
 	Status         bool
 	DetailProducts []DetailProduct `json:"-",gorm:"foreignKey:color_id;"`
 }
+type ColorCreate struct {
+	ID        int
+	ColorName string
+}

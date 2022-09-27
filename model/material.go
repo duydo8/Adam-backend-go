@@ -11,3 +11,7 @@ type Material struct {
 	Status           bool
 	MaterialProducts []MaterialProduct `json:"-" gorm:"foreignKey:material_id"`
 }
+type MaterialCreate struct {
+	ID           int
+	MaterialName string
+}

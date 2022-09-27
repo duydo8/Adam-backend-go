@@ -3,14 +3,13 @@ package model
 import "time"
 
 type Order struct {
-	ID          int
-	Status      int
-	CreateDate  time.Time `gorm:"column:create_date"`
-	AccountId   int
-	FullName    string
-	PhoneNumber string
-	AmountPrice float64
-
+	ID               int
+	Status           int
+	CreateDate       time.Time `gorm:"column:create_date"`
+	AccountId        int
+	FullName         string
+	PhoneNumber      string
+	AmountPrice      float64
 	SalePrice        float64
 	TotalPrice       float64
 	AddressId        int

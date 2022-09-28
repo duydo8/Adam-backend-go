@@ -72,6 +72,8 @@ func main() {
 		product := admin.Group("product")
 		{
 			product.POST("create", Admin.ProductAdminCreate)
+			product.PUT("update", Admin.ProductAdminUpdate)
+			product.DELETE("deleteById", Admin.ProductAdminDelete)
 		}
 
 	}

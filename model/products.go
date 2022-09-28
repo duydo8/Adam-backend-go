@@ -25,3 +25,22 @@ type ProductAdminCreate struct {
 	Image       string
 	CategoryId  int
 }
+type ProductUpdateAdmin struct {
+	ID          int
+	ProductName string
+	Description string
+	Image       string
+	VoteAverage float64
+	CategoryId  int
+	TagIds      []int
+	MaterialIds []int
+	Status      bool
+}
+type ProductAdminCreateArray struct {
+	ProductName    string
+	CategoryId     int
+	Description    string
+	Image          string
+	TagIdList      []int
+	MaterialIdList []int
+}
